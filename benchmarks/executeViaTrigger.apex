@@ -1,1 +1,1 @@
-update [select id from account];
+update [SELECT Id FROM Account LIMIT 150];
