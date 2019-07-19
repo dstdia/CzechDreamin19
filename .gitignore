@@ -4,6 +4,7 @@
 
 # Salesforce cache
 .sfdx/
+.vscode/
 
 # Logs
 logs
@@ -26,3 +27,4 @@ Thumbs.db
 ehthumbs.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
+.vscode/settings.json
