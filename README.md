@@ -2,21 +2,41 @@
 
 This guide helps Salesforce developers who are new to Visual Studio Code go from zero to a deployed app using Salesforce Extensions for VS Code and Salesforce CLI.
 
-## Part 1: Choosing a Development Model
+## Assisted Deployments to a Scratch Org or a Developer Org 
 
-[![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com)
+Use either of these two options to deploy straight into a Scratch Org or a Developer Org / Sandbox using the "Deploy To Salesforce DX" or "Deploy To Salesforce" buttons.
 
-There are two types of developer processes or models supported in Salesforce Extensions for VS Code and Salesforce CLI. These models are explained below. Each model offers pros and cons and is fully supported.
+[![Deploy with SFDX](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com)
 
-### Package Development Model
+[![Deploy to Salesforce](https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png)](https://githubsfdeploy.herokuapp.com/app/githubdeploy/dstdia/CzechDreamin19_Kafka
+)
 
-The package development model allows you to create self-contained applications or libraries that are deployed to your org as a single package. These packages are typically developed against source-tracked orgs called scratch orgs. This development model is geared toward a more modern type of software development process that uses org source tracking, source control, and continuous integration and deployment.
+We strongly recommend not to deploy to Production Orgs. Our samples are build to benchmark 
 
-If you are starting a new project, we recommend that you consider the package development model. To start developing with this model in Visual Studio Code, see [Package Development Model with VS Code](https://forcedotcom.github.io/salesforcedx-vscode/articles/user-guide/package-development-model). For details about the model, see the [Package Development Model](https://trailhead.salesforce.com/en/content/learn/modules/sfdx_dev_model) Trailhead module.
+## Build From Source with Salesforce DX 
 
-If you are developing against scratch orgs, use the command `SFDX: Create Project` (VS Code) or `sfdx force:project:create` (Salesforce CLI)  to create your project. If you used another command, you might want to start over with that command.
+We have simplified the installation with Salesforce DX by providing a shell script. 
+For Windows, run createScratchOrg.ps1 in Powershell
+For Mac/Unix/Linux, run createScratchOrg.sh in the terminal of choice.
 
-When working with source-tracked orgs, use the commands `SFDX: Push Source to Org` (VS Code) or `sfdx force:source:push` (Salesforce CLI) and `SFDX: Pull Source from Org` (VS Code) or `sfdx force:source:pull` (Salesforce CLI). Do not use the `Retrieve` and `Deploy` commands with scratch orgs.
+The shell script performs the following steps:
+
+* Create a scratch org from the included config file
+* Installs MyTriggers as an Unlocked Package
+* Pushes a release version of Logger to the scratch org
+* Pushes the demo code & metadata to the scratch org
+* Assigns the permission set LoggerPermissions to the running user
+* Assigns the permission set CodeClicksKafka to the running user
+
+If you want to manually build from scratch, please consider completing these steps before you try to run the examples. 
+
+### Open Source Software
+
+Our demo code makes use of Open Source software, published under the licenses stated below. Please review the license when using / adapting any code contained in this repository:
+
+* Logger published by Christian Szandor Knapp. See https://github.com/Szandor72/logger
+* MyTriggers published under MIT License by appero GmbH. See https://github.com/appero-com/MyTriggers
+
 
 ### Org Development Model
 
