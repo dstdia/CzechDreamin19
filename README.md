@@ -41,17 +41,17 @@ If you want to manually build from scratch, please consider completing these ste
 ## Run the record insert scripts
 The folder benchmark contains a shell script to insert a number of records. To use the script, run
 
-./insertNRecords.sh <number of records> 
+```./insertNRecords.sh <number of records> ```
 	
 from your terminal (Mac/Linux/Unix) or 
 
-insertNRecords.ps1 <number of records> 
+```insertNRecords.ps1 <number of records> ```
 
 from Powershell (Windows). 
 
 If you prefer to run the benchmark script from Developer Console or the command line, copy & paste the following:
 
-`Integer iNumberOfRecords = 0;
+```Integer iNumberOfRecords = 0;
 List<Mock__c> lMocks = new List<Mock__c>();
 
 for (Integer i = 0; i < $1; i++) {
@@ -60,20 +60,20 @@ for (Integer i = 0; i < $1; i++) {
 		));
 }
 
-insert lMocks;`
+insert lMocks;```
 
 and set iNumberOfRecords to the desired number of records.
 
 To execute code from the developer console, open Debug > Execute Anonymous from the menu.
 
 To execute code from the SFDX CLI, run
-`sfdx force:apex:execute`
+```sfdx force:apex:execute```
 Then paste the snippet and hit `Ctrl + D` to execute the code block and wait for the results. 
 
 ## Retrieve the resulting log files
 
 To retrieve the operation's results, run
-`sfdx force:apex:log:get` 
+```sfdx force:apex:log:get```
 from the Salesforce command line. 
 
 ## Filter what you want to see
