@@ -1,12 +1,12 @@
 # "The Trial. Clicks, Code, and Kafka"
 
-Demo Code from the presentation held at CzechDreamin' '19 by [!Christian Szandor Knapp](https//github.com/szandor72) and [!Daniel Stange](https//github.com/dstdia) on August 16, 2019.
+Demo Code from the presentation held at CzechDreamin' '19 by [Christian Szandor Knapp](https//github.com/szandor72) and [Daniel Stange](https//github.com/dstdia) on August 16, 2019.
 
 Session Abstract: "Code works just fine. Clicks work just fine. But when you combine code and clicks – Apex Trigger and Process Builder Actions for example, this is where you invite Kafka’s paradoxes – also known as WTFs? – into your Org: Everything looks peachy at the beginning, over time you add more functionality only to wake up one morning to find your org transformed into a gigantic bug.
 
 In this session we will demonstrate how easy it is to really blow things up using code and clicks. And, of course, how to avoid this scenario altogether. We will put our – and your – assumptions on Trial: Is it true that Apex performs faster than Flow? Can CPU Time exceptions be avoided? Do best practices we know from Code apply to Clicks as well?"
 
-[! Presentation Slides from Czech Dreamin' 19 on Google Drive] (https://drive.google.com/file/d/1WW71_U3nE1LPd3lETS-s5_Smucoxv3xs/view?usp=sharing) 
+[Presentation Slides from Czech Dreamin' 19 on Google Drive](https://drive.google.com/file/d/1WW71_U3nE1LPd3lETS-s5_Smucoxv3xs/view?usp=sharing) 
 
 ## Assisted Deployments to a Scratch Org or a Developer Org 
 
@@ -49,6 +49,8 @@ The sample code contains three Custom Metadata Type to configure the logic
 
 ### Activate / Deactivate Triggers
 
+Check the "Active" check box in the configuration to toggle Trigger code execution.
+
 ### Control the Executed Units in Process Builder
 Using this Custom Metadata Type record, you can select which unit will actually do the work that ProcessBuilder "Mock" is about to perform. 
 
@@ -56,11 +58,13 @@ Using this Custom Metadata Type record, you can select which unit will actually 
 * "Subprocess" - executes an invocable Process Builder ("createMockMocks")
 * "Flow" - executes an autolaunched Flow ("createMockMocksFlow")
 * "Apex" - executes an Invocable Method ("Invocable_MockMockService.createMockMock()")
-* "Flow + 2x Apex" - executes an autolaunched Flow ("createDeepMockMocks") that sequentially invokes two Invocable Methods  (Invocable_MockMockService.createMockMock(), Invocable_MockMockCheckService.checkMockMock() 
+* "Flow + 2x Apex" - executes an autolaunched Flow ("createDeepMockMocks") that sequentially invokes two Invocable Methods  (Invocable_MockMockService.createMockMock(), Invocable_MockMockCheckService.checkMockMock()) 
+
+Note: This only toggles the execution flow in the Process - You still have to activate / deactivate Process Builder manually.
 
 ### Bulk Uploads
 
-Utilize the Mock__c import file to load
+Utilize the Mocks.csv file to benchmark an insert of 200 Mock__c record into the org
 
 ## Open Source Software
 
