@@ -38,6 +38,15 @@ If you want to manually build from scratch, please consider completing these ste
 
 # Run the benchmarks
 
+## Apex Benchmark Snippets
+Check the folder ´benchmark´ for code snippets to execut
+
+Run the code snippets via the SFDX CLI:
+
+## Retrieve the resulting log files
+
+## Filter what you want to see
+
 ## Switching the logic
 
 The sample code contains three Custom Metadata Type to configure the logic
