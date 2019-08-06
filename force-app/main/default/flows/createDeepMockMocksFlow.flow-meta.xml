@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>CheckMockMocks</name>
+        <label>Check MockMocks</label>
+        <locationX>499</locationX>
+        <locationY>236</locationY>
+        <actionName>Invocable_MockMockCheckService</actionName>
+        <actionType>apex</actionType>
+        <inputParameters>
+            <name>lMockMocks</name>
+            <value>
+                <elementReference>newMockMock</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>newMockMock</assignToReference>
+            <name>output</name>
+        </outputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Create MockMock records</description>
+        <name>CreateMocks</name>
+        <label>Create Mocks</label>
+        <locationX>500</locationX>
+        <locationY>49</locationY>
+        <actionName>Invocable_MockMockService</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>CheckMockMocks</targetReference>
+        </connector>
+        <inputParameters>
+            <name>lMocks</name>
+            <value>
+                <elementReference>ParentMock</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>newMockMock</assignToReference>
+            <name>output</name>
+        </outputParameters>
+    </actionCalls>
+    <description>create MockMocks from ProcessBuilder</description>
+    <interviewLabel>createDeepMockMocks {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>createDeepMockMocksFlow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>CreateMocks</startElementReference>
+    <status>Active</status>
+    <variables>
+        <description>newMockMock</description>
+        <name>newMockMock</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>MockMock__c</objectType>
+    </variables>
+    <variables>
+        <name>ParentMock</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Mock__c</objectType>
+    </variables>
+</Flow>
