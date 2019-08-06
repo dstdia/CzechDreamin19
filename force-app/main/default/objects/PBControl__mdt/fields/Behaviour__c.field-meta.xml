@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Behaviour__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Behaviour</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Node</fullName>
+                <default>true</default>
+                <label>Node</label>
+            </value>
+            <value>
+                <fullName>Subprocess</fullName>
+                <default>false</default>
+                <label>Subprocess</label>
+            </value>
+            <value>
+                <fullName>Flow</fullName>
+                <default>false</default>
+                <label>Flow</label>
+            </value>
+            <value>
+                <fullName>Apex</fullName>
+                <default>false</default>
+                <label>Apex</label>
+            </value>
+            <value>
+                <fullName>ComplexFlow</fullName>
+                <default>false</default>
+                <label>Flow + 2x Apex</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

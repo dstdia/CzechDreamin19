@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Controls the behaviour of Process Builders in this org and gates logic to either a node in the Process, a flow, a subprocess or Apex</description>
+    <label>Process Builder Control</label>
+    <pluralLabel>Process Builder Controls</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

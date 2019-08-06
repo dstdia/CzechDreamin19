@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>create MockMocks from PorcessBuilder</description>
+    <interviewLabel>createMockMocks {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>createMockMocksFlow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>creates a mockmock per mock</description>
+        <name>create_MockMocks</name>
+        <label>create MockMocks</label>
+        <locationX>302</locationX>
+        <locationY>50</locationY>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>mockName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentMock__c</field>
+            <value>
+                <elementReference>mockId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>MockMock__c</object>
+    </recordCreates>
+    <startElementReference>create_MockMocks</startElementReference>
+    <status>Active</status>
+    <variables>
+        <description>mockId</description>
+        <name>mockId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <stringValue/>
+        </value>
+    </variables>
+    <variables>
+        <description>mockName</description>
+        <name>mockName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <stringValue/>
+        </value>
+    </variables>
+    <variables>
+        <description>newMockMock</description>
+        <name>newMockMock</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>MockMock__c</objectType>
+    </variables>
+</Flow>
