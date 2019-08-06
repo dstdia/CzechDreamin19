@@ -13,18 +13,8 @@ sfdx force:source:push
 if [[ $? -gt 0 ]] ; then exit 1; fi
 	
 # Assign Permissions
-sfdx force:user:permset:assign -n logger
+sfdx force:user:permset:assign -n LoggerPermissions
 if [[ $? -gt 0 ]] ; then exit 1; fi
 
-sfdx force:user:permset:assign -n thetrial
-if [[ $? -gt 0 ]] ; then exit 1; fi
-
-# Load Data
-sfdx force:data:bulk:upsert -f data/Accounts.csv -s Account -i ExtId__c  -w 10
-if [[ $? -gt 0 ]] ; then exit 1; fi
-	
-sfdx force:data:bulk:upsert -f data/Contacts.csv -s Contact -i ExtId__c  -w 10
-if [[ $? -gt 0 ]] ; then exit 1; fi
-	
-sfdx force:data:bulk:upsert -f data/Products.csv -s Product2 -i ExtId__c  -w 10
+sfdx force:user:permset:assign -n CodeClicksKafka
 if [[ $? -gt 0 ]] ; then exit 1; fi

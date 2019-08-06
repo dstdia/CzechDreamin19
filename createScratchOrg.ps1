@@ -10,12 +10,7 @@ sfdx force:package:install -p 04t1i000000gZ4HAAU -w 10
 sfdx force:source:push
 	
 # Assign Permissions
-sfdx force:user:permset:assign -n logger
-sfdx force:user:permset:assign -n thetrial
+sfdx force:user:permset:assign -n LoggerPermissions
+sfdx force:user:permset:assign -n CodeClicksKafka
 
 # Load Data
-sfdx force:data:bulk:upsert -f data/Accounts.csv -s Account -i ExtId__c  -w 10
-	
-sfdx force:data:bulk:upsert -f data/Contacts.csv -s Contact -i ExtId__c  -w 10
-	
-sfdx force:data:bulk:upsert -f data/Products.csv -s Product2 -i ExtId__c  -w 10

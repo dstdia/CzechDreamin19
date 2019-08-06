@@ -5,6 +5,7 @@ private class LoggerTest {
 
 	@istest
 	private static void log_MessageGiven_Success() {
+		LoggerConfig.enableLoggingOverride = true;
 		String testString = 'Test Running';
 		Test.startTest();
 		Logger.log(testString);
@@ -25,6 +26,7 @@ private class LoggerTest {
 
 	@istest
 	private static void log_setMethodName_Success() {
+		LoggerConfig.enableLoggingOverride = true;
 		Test.startTest();
 		System.assertEquals(0, Logger.currentLoggingLevel,'Loglevel = 0');
 		Logger.log('Test message');
@@ -34,6 +36,7 @@ private class LoggerTest {
 
 	@istest
 	private static void log_setLogEntryAttributes_Success() {
+		LoggerConfig.enableLoggingOverride = true;
 		Test.startTest();
 		System.assertEquals(0, Logger.currentLoggingLevel,'Loglevel = 0');
 		Logger.log('Test message');
@@ -45,6 +48,7 @@ private class LoggerTest {
 
 	@istest
 	private static void push_IncrementsLogLevel_Success() {
+		LoggerConfig.enableLoggingOverride = true;
 		Test.startTest();
 		System.assertEquals(0, Logger.currentLoggingLevel,'Loglevel = 0');
 		Logger.push();
@@ -54,6 +58,7 @@ private class LoggerTest {
 
 	@istest
 	private static void push_setMethodName_Success() {
+		LoggerConfig.enableLoggingOverride = true;
 		Test.startTest();
 		System.assertEquals(0, Logger.currentLoggingLevel,'Loglevel = 0');
 		Logger.push();
@@ -64,6 +69,7 @@ private class LoggerTest {
 
 	@istest
 	private static void printLog_Success() {
+		LoggerConfig.enableLoggingOverride = true;
 		Test.startTest();
 		Logger.push();
 		Test.stopTest();
@@ -81,9 +87,9 @@ private class LoggerTest {
 		Logger.cpuTimeStart = 300;
 		Logger.cpuTimeEnd = 400;
 		Logger.cpuTimeUsage = 100;
-		AppConfigSupport.enableLogging = false;
-		AppConfigSupport.saveExceptionLogs = false;
-		AppConfigSupport.saveAllLogs=true;
+		LoggerConfig.enableLoggingOverride = false;
+		LoggerConfig.saveExceptionLogsOverride = false;
+		LoggerConfig.saveAllLogsOverride =true;
 		Test.startTest();
 		Database.SaveResult result = Logger.sendLog();
 		Test.stopTest();
@@ -100,7 +106,8 @@ private class LoggerTest {
 		Logger.cpuTimeEnd = 400;
 		Logger.cpuTimeUsage = 100;
 		Logger.logEntries = new List<Logger.LogEntry>{new Logger.LogEntry('test message')};
-		AppConfigSupport.saveAllLogs=true;
+		LoggerConfig.enableLoggingOverride = true;
+		LoggerConfig.saveAllLogsOverride = true;
 		Test.startTest();
 		Database.SaveResult result = Logger.sendLog();
 		Test.stopTest();
@@ -112,7 +119,25 @@ private class LoggerTest {
 
 	@isTest
 	private static void sendLog_Success() {
-		AppConfigSupport.saveAllLogs=true;
+		LoggerConfig.enableLoggingOverride = true;
+		LoggerConfig.saveAllLogsOverride = true;
+		Test.startTest();
+		Logger.log('test message');
+		Database.SaveResult result = Logger.sendLog();
+		Test.stopTest();
+		System.assertEquals(true, result.isSuccess(),
+		                    'Event must save successfully');
+		List<debugEntry__c> entries = [SELECT Id, LogEntryJSON__c, cpuTimeUsage__c from DebugEntry__c Limit 10];
+		System.assertEquals(1,entries.size(),
+		                    'One Entry saved');
+		System.assertNotEquals(true, String.isBlank(entries[0].logEntryJSON__c),'JSON is filled');
+		System.assertNotEquals(null, entries[0].cpuTimeUsage__c,'CPU Time is filled');
+	}
+
+	@isTest
+	private static void sendLog_UserBasedLogging_Success() {
+		LoggerConfig.enableLoggingOverride = true;
+		LoggerConfig.saveUserLogsOverride = true;
 		Test.startTest();
 		Logger.log('test message');
 		Database.SaveResult result = Logger.sendLog();
@@ -128,7 +153,7 @@ private class LoggerTest {
 
 	@isTest
 	private static void handleJSONLength_Success() {
-		AppConfigSupport.saveAllLogs=true;
+		LoggerConfig.enableLoggingOverride = true;
 		Logger.log('test message');
 		Logger.log('test message with some more characters than the last one');
 		Test.startTest();
@@ -141,7 +166,7 @@ private class LoggerTest {
 
 	@isTest
 	private static void getLogJSON_Success() {
-		AppConfigSupport.saveAllLogs=true;
+		LoggerConfig.enableLoggingOverride = true;
 		Logger.log('test message');
 		Logger.log('test message with some more characters than the last one');
 		Test.startTest();
@@ -152,6 +177,7 @@ private class LoggerTest {
 
 	@isTest
 	private static void pop_DecrementsLogLevel_Success() {
+		LoggerConfig.enableLoggingOverride = true;
 		Test.startTest();
 		Logger.push();
 		Logger.push();
@@ -163,22 +189,23 @@ private class LoggerTest {
 
 	@isTest
 	private static void logTrigger_AllVariations_Success() {
-		AppConfigMain.isActive = true;
+		LoggerConfig.enableLoggingOverride = true;
 		Test.startTest();
-		Logger.logTrigger(null, 'fakeTrace');
+		Logger.logTrigger(null);
 		Logger.log('message');
 		System.assertEquals(0, Logger.executedTriggerOperations.size(),'No operation was added to list');
 		System.assert (Logger.logEntries.size()>0,'At first we got entries');
 		Logger.currentTriggerOperation = System.TriggerOperation.AFTER_UPDATE;
-		Logger.logTrigger(System.TriggerOperation.AFTER_INSERT, 'fakeTrace');
+		Logger.logTrigger(System.TriggerOperation.AFTER_INSERT);
 		Logger.currentTriggerOperation = System.TriggerOperation.AFTER_UPDATE;
-		Logger.logTrigger(System.TriggerOperation.AFTER_UPDATE, 'fakeTrace');
+		Logger.logTrigger(System.TriggerOperation.AFTER_UPDATE);
 		Test.stopTest();
 		System.assertEquals(0, Logger.logEntries.size(), 'LogEntries empty after log Trigger completion');
 	}
 
 	@isTest
 	private static void logException_Success() {
+		LoggerConfig.enableLoggingOverride = true;
 		Test.startTest();
 		try {
 			throw new DmlException();
@@ -194,6 +221,7 @@ private class LoggerTest {
 
 	@isTest
 	private static void popAll_DecrementsLogLevel_Success() {
+		LoggerConfig.enableLoggingOverride = true;
 		Test.startTest();
 		Logger.push();
 		Logger.push();
@@ -207,7 +235,7 @@ private class LoggerTest {
 
 	@isTest
 	private static void disabledLogging() {
-		AppConfigSupport.enableLogging = false;
+		LoggerConfig.enableLoggingOverride = false;
 		Test.startTest();
 		Logger.push();
 		Logger.log('message');
