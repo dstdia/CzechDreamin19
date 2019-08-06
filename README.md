@@ -60,7 +60,8 @@ for (Integer i = 0; i < $1; i++) {
 		));
 }
 
-insert lMocks;```
+insert lMocks;
+```
 
 and set iNumberOfRecords to the desired number of records.
 
